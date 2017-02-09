@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>在github上搭建免费blog</title>
     <link href="../bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        img{
-            border: 1px solid gray;
-            width: 100%;
-        }
-    </style>
+    <link href="../css/page.css" rel="stylesheet">
 </head>
 <body>
 
@@ -24,24 +19,58 @@
                 </h3>
             </div>
             <p>
-                登录github，选择Create a new repository创建一个新的项目demo，点击右上角的setting进入项目设置界面。
+                登录github，选择Create a new repository创建一个新的项目，项目名称必须是username.github.io，用这个项目名则项目默认开启Github Pages功能。如果用其他项目名，则
+                必须在项目设置中开启Github Pages，并且博客的访问地址会类似于username.github.io/project，无法为该url绑定独立域名。
             </p>
             <p>
-                <img src="page1_img/1.png">
+                创建项目后，在本地路径&nbsp;E:/github/&nbsp;下使用git操作将项目克隆到本地，如果没有安装git先安装git再做之后的操作，windows下运行cmd：
             </p>
             <p>
-                找到GitHub Pages，在Source中选择master,即表示在该项目中启用Github Pages功能，点击旁边的save保存。
+                <pre>
+E:
+cd github
+git clone https://github.com/lindakai2016/lindakai2016.github.io.git</pre>
             </p>
             <p>
-                <img src="page1_img/2.png">
+                执行完成后会生成lindakai2016.github.io文件夹，重命名为blog，在blog下新建index.html，内容如下：
             </p>
             <p>
-                保存成功会出现Your site is ready to be published at https://lindakai2016.github.io/demo/.后面为博客的url，默认使用的是github的域名，你也可以使用自己的域名，那么首先
-                必须找一个域名商注册一个域名，然后在域名DNS记录中添加一个CNAME记录指向默认的github博客域名。
+                <pre>
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    My Blog
+&lt;/body&gt;
+&lt;/html></pre>
             </p>
             <p>
-                <img src="page1_img/3.png">
+                再用cmd执行如下git命令，上传index.html：
             </p>
+            <p>
+                <pre>
+git init
+git remote add origin  https://github.com/lindakai2016/lindakai2016.github.io.git
+git add .
+git commit -m "注释内容"
+git push origin master</pre>
+            </p>
+            <p>
+                上传成功后，正常情况下用浏览器访问lindakai2016.github.io就会出现index.html的内容。
+            </p>
+            <p>如果要绑定独立的域名，而不是使用默认的username.github.io，先从域名商那里注册一个域名，并添加如下3个DNS记录:</p>
+            <p>
+                <pre>
+A   @   192.30.252.153
+A   @   192.30.252.154
+CNAME   www   lindakai2016.github.io</pre>
+            </p>
+            <p>
+                设置之后需要等待DNS服务器更新，更新完后，如果直接访问域名会出现无法访问，我们还需要在项目中添加一个cname文件，在文件中添加域名，然后提交，或者更快速的方式是
+                在项目设置中，找到Github Pages，在Custom domain中输入域名，点击保存，github会自动生成cname文件。
+            </p>
+            <p><img src="page1_img/1.png"></p>
         </div>
     </div>
 </div>
