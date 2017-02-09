@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>git常用命令</title>
+    <link href="../bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/page.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="page-header">
+                <h3>
+                    git常用命令
+                </h3>
+            </div>
+            <p>
+                git环境设置
+            </p>
+            <p>
+            <pre>
+git config --global user.name "username"    #设置用户名
+git config --global user.email "email@example.com"  #设置邮箱
+git config --global credential.helper store     #将配置文件添加到全局配置，使用https方式避免重复输入用户名密码</pre>
+            </p>
+            <p>
+                git仓库管理
+            </p>
+            <p>
+            <pre>
+git init    #初始化本地仓库
+git remote -v   #查看远程服务器地址和仓库名称
+git remote show origin  #查看远程服务器仓库状态
+git remote add origin [url]  #添加远程仓库
+git remote rm origin [url]  #删除远程仓库
+git clone [url]     #用带版本的项目创建纯版本仓库</pre>
+            </p>
+            <p>
+                git更新项目
+            </p>
+            <p>
+            <pre>
+git fetch origin master  #获取master分支的更新
+git merge origin/master     #将master分支合并到本地分支
+git pull origin master   #抓取master分支的更新并合并到本地，结合fetch与merge操作</pre>
+            </p>
+            <p>
+                git提交项目
+            </p>
+            <p>
+            <pre>
+git add [file]    #将工作文件修改提交到本地暂存区
+git add .   #将所有修改提交到暂存区
+git push origin master  #将本地分支推送到master</pre>
+            </p>
+            <p>
+                git暂存
+            </p>
+            <p>
+                <pre>
+git stash      #暂存
+git stash list    #列出所有stash
+git stash apply     #恢复暂存的内容
+git stash drop     #删除暂存区</pre>
+            </p>
+            <p>git查看、切换、创建和删除分支</p>
+            <p>
+            <pre>
+git branch -r origin/master     #查看master分支的更新
+git branch -a   #查看所有分支的更新
+git branch [new_branch]     #创建新的分支
+git branch -v   #查看各个分支最后提交信息
+git branch --merged     #查看已经被合并到当前分支的分支
+git branch --no-merged  #查看尚未被合并到当前分支的分支
+git branch -d [branch]  #删除某个分支
+git branch -D [branch]  #强制删除某个分支 (未被合并的分支被删除的时候需要强制)</pre>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
