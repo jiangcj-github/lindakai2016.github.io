@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在github上搭建免费blog</title>
+    <link href="../bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        img{
+            border: 1px solid gray;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="page-header">
+                <h3>
+                    在github上搭建免费blog详细步骤
+                </h3>
+            </div>
+            <p>
+                登录github，选择Create a new repository创建一个新的项目demo，点击右上角的setting进入项目设置界面。
+            </p>
+            <p>
+                <img src="page1_img/1.png">
+            </p>
+            <p>
+                找到GitHub Pages，在Source中选择master,即表示在该项目中启用Github Pages功能，点击旁边的save保存。
+            </p>
+            <p>
+                <img src="page1_img/2.png">
+            </p>
+            <p>
+                保存成功会出现Your site is ready to be published at https://lindakai2016.github.io/demo/.后面为博客的url，默认使用的是github的域名，你也可以使用自己的域名，那么首先
+                必须找一个域名商注册一个域名，然后在域名DNS记录中添加一个CNAME记录指向默认的github博客域名。
+            </p>
+            <p>
+                <img src="page1_img/3.png">
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
