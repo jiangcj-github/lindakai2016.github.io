@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>springMVC中添加freemarker作为返回模板</title>
+    <link href="../bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/page.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="page-header">
+                <h3>
+                    springMVC中添加freemarker作为返回模板
+                </h3>
+            </div>
+            <p>
+                在web/WEB-INF/lib下添加freemarker.jar<br>
+                下载地址:&nbsp;<a href="http://freemarker.org/freemarkerdownload.html" target="_blank">http://freemarker.org/freemarkerdownload.html</a>
+            </p>
+            <p>
+                在spring全局配置文件applicationContext.xml中添加freemarker支持，如下:
+            </p>
+            <p>
+            <pre>
+&lt;!-- Freemarker配置 --&gt;
+&lt;bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"&gt;
+    &lt;property name="templateLoaderPath" value="/views" /&gt;
+    &lt;property name="freemarkerSettings"&gt;
+        &lt;props&gt;
+            &lt;prop key="template_update_delay"&gt;0&lt;/prop&gt;
+            &lt;prop key="default_encoding"&gt;UTF-8&lt;/prop&gt;
+            &lt;prop key="number_format"&gt;0.##########&lt;/prop&gt;
+            &lt;prop key="datetime_format"&gt;yyyy-MM-dd HH:mm:ss&lt;/prop&gt;
+            &lt;prop key="classic_compatible"&gt;true&lt;/prop&gt;
+            &lt;prop key="template_exception_handler"&gt;ignore&lt;/prop&gt;
+        &lt;/props&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;</pre>
+            </p>
+            <p>
+                在根目录下新建views文件夹存放模板，其路径与上面配置一致。然后需要在spring-servlet中配置freemarker的视图解析器,添加如下代码：
+            </p>
+            <p>
+                <pre>
+&lt;!--freemarker模板视图解析器--&gt;
+&lt;bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"&gt;
+    &lt;property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/&gt;
+    &lt;property name="contentType" value="text/html; charset=utf-8"/&gt;
+    &lt;property name="cache" value="true" /&gt;
+    &lt;property name="suffix" value=".ftl" /&gt;
+    &lt;property name="order" value="0"/&gt;
+&lt;/bean&gt;</pre>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
