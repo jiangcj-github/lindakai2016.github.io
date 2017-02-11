@@ -79,6 +79,21 @@ git branch --no-merged  #查看尚未被合并到当前分支的分支
 git branch -d [branch]  #删除某个分支
 git branch -D [branch]  #强制删除某个分支 (未被合并的分支被删除的时候需要强制)</pre>
             </p>
+            <p>冲突处理</p>
+            <p>
+                <pre>
+git diff    #比较工作区与暂存区差异
+git diff --cached    #比较暂存区和版本库差异
+git diff --staged   #同上
+git diff HEAD   #比较工作区与版本库差异</pre>
+            </p>
+            <p>常见错误</p>
+            <p>
+                <pre>
+执行git pull，出现git refusing to merge unrelated histories
+解决方法：git pull后面加--allow-unrelated-histories选择，强制合并。
+        </pre>
+            </p>
         </div>
     </div>
 </div>
