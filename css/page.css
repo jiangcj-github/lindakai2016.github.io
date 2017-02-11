@@ -1,5 +1,11 @@
-pre >span{
+/*代码注释*/
+pre comment{
     color: #008000;
+}
+
+pre primary{
+    font-weight: bold;
+    color: darkgreen;
 }
 
 img{

@@ -27,9 +27,10 @@
             </p>
             <p>
             <pre>
-&lt;!-- Freemarker配置 --&gt;
+<comment>&lt;!-- Freemarker配置 --&gt;</comment>
 &lt;bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"&gt;
-    &lt;property name="templateLoaderPath" value="/views" /&gt;
+    <comment>&lt:!--模板存放路径--&gt;</comment>
+    &lt;property name="templateLoaderPath" value="/views/" /&gt;
     &lt;property name="freemarkerSettings"&gt;
         &lt;props&gt;
             &lt;prop key="template_update_delay"&gt;0&lt;/prop&gt;
@@ -47,11 +48,8 @@
             </p>
             <p>
                 <pre>
-&lt;!--freemarker模板视图解析器--&gt;
+<comment>&lt;!--freemarker模板视图解析器--&gt;</comment>
 &lt;bean id="viewResolverFtl" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"&gt;
-    &lt;property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/&gt;
-    &lt;property name="contentType" value="text/html; charset=utf-8"/&gt;
-    &lt;property name="cache" value="true" /&gt;
     &lt;property name="suffix" value=".ftl" /&gt;
     &lt;property name="order" value="0"/&gt;
 &lt;/bean&gt;</pre>

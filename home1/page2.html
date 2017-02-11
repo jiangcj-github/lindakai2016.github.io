@@ -47,21 +47,21 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1"&gt;
 
-    <span>&lt;!--配置spring--&gt;</span>
+    <comment>&lt;!--配置spring--&gt;</comment>
     &lt;listener&gt;
         &lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
     &lt;/listener&gt;
 
-    <span>&lt;!--配置springMVC--&gt;</span>
+    <comment>&lt;!--配置springMVC--&gt;</comment>
     &lt;servlet&gt;
         &lt;servlet-name&gt;spring&lt;/servlet-name&gt;
         &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
-        <span>&lt;!-- 可以自定义servlet.xml配置文件的位置和名称，默认为WEB-INF目录下，名称为[&lt;servlet-name&gt;]-servlet.xml，如spring-servlet.xml
+        <comment>&lt;!-- 可以自定义servlet.xml配置文件的位置和名称，默认为WEB-INF目录下，名称为[&lt;servlet-name&gt;]-servlet.xml，如spring-servlet.xml
         &lt;init-param&gt;
             &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
             &lt;param-value&gt;/WEB-INF/spring-servlet.xml&lt;/param-value&gt;&nbsp;
         &lt;/init-param&gt;
-        --&gt;</span>
+        --&gt;</comment>
         &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
     &lt;/servlet&gt;
     &lt;servlet-mapping&gt;
@@ -69,13 +69,13 @@
         &lt;url-pattern&gt;/&lt;/url-pattern&gt;
     &lt;/servlet-mapping&gt;
 
-    <span>&lt;!-- 指定Spring Bean的配置文件所在目录,默认为/WEB-INF/applicationContext.xml,如果使用默认值，则必须新建applicationContext.xml --&gt;</span>
+    <comment>&lt;!-- 指定Spring Bean的配置文件所在目录,默认为/WEB-INF/applicationContext.xml,如果使用默认值，则必须新建applicationContext.xml --&gt;</comment>
     &lt;context-param&gt;
         &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
         &lt;param-value&gt;/WEB-INF/applicationContext.xml&lt;/param-value&gt;
     &lt;/context-param&gt;
 
-    <span>&lt;!-- 设置字符集，以便支持中文 --&gt;</span>
+    <comment>&lt;!-- 设置字符集，以便支持中文 --&gt;</comment>
     &lt;filter&gt;
         &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
         &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
@@ -107,13 +107,13 @@
           http://www.springframework.org/schema/mvc
           http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"&gt;
 
-    <span>&lt;!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean--&gt;</span>
+    <comment>&lt;!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean--&gt;</comment>
     &lt;context:component-scan base-package="com.example.package" /&gt;
 
-    <span>&lt;!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射 --&gt;</span>
+    <comment>&lt;!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射 --&gt;</comment>
     &lt;mvc:annotation-driven /&gt;
 
-    <span>&lt;!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 --&gt;</span>
+    <comment>&lt;!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 --&gt;</comment>
     &lt;bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
         &lt;property name="prefix" value=""&gt;&lt;/property&gt;
         &lt;property name="suffix" value=".jsp"&gt;&lt;/property&gt;
