@@ -57,6 +57,102 @@
             <p>
                 关于freemarker语法可查看<a href="http://freemarker.org/docs/index.html" target="_blank">官方文档</a>
             </p>
+            <p>
+                freemarker默认是没有模板继承功能的，为其添加3个新指令@extends,@block,@override，这三个指令属于rapid-framework的扩展<br>
+                下载地址：&nbsp;
+                <a href="http://www.java2s.com/Code/JarDownload/rapid/rapid-core-4.0.3.jar.zip" target="_blank">
+                    http://www.java2s.com/Code/JarDownload/rapid/rapid-core-4.0.3.jar.zip
+                </a><br>
+                另外还需commons-lang.jar的支持<br>
+                下载地址：&nbsp;
+                <a href="https://mirrors.tuna.tsinghua.edu.cn/apache//commons/lang/binaries/commons-lang-2.6-bin.zip" target="_blank">
+                    https://mirrors.tuna.tsinghua.edu.cn/apache//commons/lang/binaries/commons-lang-2.6-bin.zip
+                </a>
+            </p>
+            <p>
+                在spring的全局配置文件applicationContext.xml中配置这三条指令：
+            </p>
+            <p><pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/mvc
+          http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"&gt;
+
+    <comment>&lt;!-- Freemarker配置 --&gt;</comment>
+    &lt;bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"&gt;
+        &lt;property name="templateLoaderPath" value="/views/" /&gt;
+        &lt;property name="freemarkerSettings"&gt;
+            &lt;props&gt;
+                &lt;prop key="template_update_delay"&gt;0&lt;/prop&gt;
+                &lt;prop key="default_encoding"&gt;UTF-8&lt;/prop&gt;
+                &lt;prop key="number_format"&gt;0.##########&lt;/prop&gt;
+                &lt;prop key="datetime_format"&gt;yyyy-MM-dd HH:mm:ss&lt;/prop&gt;
+                &lt;prop key="classic_compatible"&gt;true&lt;/prop&gt;
+                &lt;prop key="template_exception_handler"&gt;ignore&lt;/prop&gt;
+            &lt;/props&gt;
+        &lt;/property&gt;
+        <comment>&lt;!-- 扩展freemarker指令 --&gt;</comment>
+        &lt;property name="freemarkerVariables"&gt;
+            &lt;map&gt;
+                &lt;entry key="extends" value-ref="extendsDirective"/&gt;
+                &lt;entry key="override" value-ref="overrideDirective"/&gt;
+                &lt;entry key="block" value-ref="blockDirective"/&gt;
+            &lt;/map&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+
+    <comment>&lt;!-- 配置freemarker扩展bean，id与上面保持一致--&gt;</comment>
+    &lt;bean id="blockDirective" class="cn.org.rapid_framework.freemarker.directive.BlockDirective"/&gt;
+    &lt;bean id="extendsDirective" class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective"/&gt;
+    &lt;bean id="overrideDirective" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective"/&gt;
+
+&lt;/beans&gt;</pre>
+            </p>
+            <p>配置完成后就可以在模板中使用上面指令，父模板base.ftl内容：</p>
+            <p><pre>
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;@block name="head"&gt;base_head_content&lt;/@block&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;@block name="body"&gt;base_body_content&lt;/@block&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre>
+            </p>
+            <p>子模板child.ftl内容：</p>
+            <p><pre>
+&lt;@override name="body"&gt;
+    &lt;div class='content'&gt;
+        Powered By rapid-framework
+    &lt;/div&gt;
+&lt;/@override&gt;
+&lt;@extends name="base.flt"/&gt;</pre>
+            </p>
+            <p>子模板child.ftl的输出：</p>
+            <p><pre>
+&lt;html&gt;
+    &lt;head&gt;
+        base_head_content
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class='content'&gt;
+            Powered By rapid-framework
+        &lt;/div&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</pre></p>
+            <p>上面三个指令的含义
+                <ul>
+                    <li>@block : 定义块，可以被子模板用@override指令覆盖显示</li>
+                    <li> @override :  覆盖@block指令显示的内容</li>
+                    <li>@extends : 继承其它模板，必须放在模板的最后面（注：该指令完全等价于#include指令，只是为了提供统一的语义，即extends比include更好理解）</li>
+                </ul>
+            </p>
         </div>
     </div>
 </div>
