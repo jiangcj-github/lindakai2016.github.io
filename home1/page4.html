@@ -58,7 +58,7 @@
                 关于freemarker语法可查看<a href="http://freemarker.org/docs/index.html" target="_blank">官方文档</a>
             </p>
             <p>
-                freemarker默认是没有模板继承功能的，为其添加3个新指令@extends,@block,@override，这三个指令属于rapid-framework的扩展<br>
+                freemarker默认是没有模板继承功能的，为其添加新指令@extends,@block,@override,@super，这些指令属于rapid-framework的扩展<br>
                 下载地址：&nbsp;
                 <a href="http://www.java2s.com/Code/JarDownload/rapid/rapid-core-4.0.3.jar.zip" target="_blank">
                     http://www.java2s.com/Code/JarDownload/rapid/rapid-core-4.0.3.jar.zip
@@ -103,6 +103,7 @@
                 &lt;entry key="extends" value-ref="extendsDirective"/&gt;
                 &lt;entry key="override" value-ref="overrideDirective"/&gt;
                 &lt;entry key="block" value-ref="blockDirective"/&gt;
+		&lt;entry key="super" value-ref="superDirective"/&gt;
             &lt;/map&gt;
         &lt;/property&gt;
     &lt;/bean&gt;
@@ -111,6 +112,7 @@
     &lt;bean id="blockDirective" class="cn.org.rapid_framework.freemarker.directive.BlockDirective"/&gt;
     &lt;bean id="extendsDirective" class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective"/&gt;
     &lt;bean id="overrideDirective" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective"/&gt;
+    &lt;bean id="superDirective" class="cn.org.rapid_framework.freemarker.directive.SuperDirective"/&gt;
 
 &lt;/beans&gt;</pre>
             </p>
@@ -128,6 +130,7 @@
             <p>子模板child.ftl内容：</p>
             <p><pre>
 &lt;@override name="body"&gt;
+    &lt;@super&gt;&lt;/@super&gt;
     &lt;div class='content'&gt;
         Powered By rapid-framework
     &lt;/div&gt;
@@ -141,15 +144,17 @@
         base_head_content
     &lt;/head&gt;
     &lt;body&gt;
+        base_body_content
         &lt;div class='content'&gt;
             Powered By rapid-framework
         &lt;/div&gt;
     &lt;/body&gt;
 &lt;/html&gt;</pre></p>
-            <p>上面三个指令的含义
+            <p>上面四个指令的含义
                 <ul>
                     <li>@block : 定义块，可以被子模板用@override指令覆盖显示</li>
-                    <li> @override :  覆盖@block指令显示的内容</li>
+                    <li>@override :  覆盖@block指令显示的内容</li>
+                    <li>@super :  在@override中显示父block的内容</li>
                     <li>@extends : 继承其它模板，必须放在模板的最后面（注：该指令完全等价于#include指令，只是为了提供统一的语义，即extends比include更好理解）</li>
                 </ul>
             </p>
