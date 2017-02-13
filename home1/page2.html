@@ -75,24 +75,6 @@
         &lt;param-value&gt;/WEB-INF/applicationContext.xml&lt;/param-value&gt;
     &lt;/context-param&gt;
 
-    <comment>&lt;!-- 设置字符集，以便支持中文 --&gt;</comment>
-    &lt;filter&gt;
-        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
-        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
-        &lt;init-param&gt;
-            &lt;param-name&gt;encoding&lt;/param-name&gt;
-            &lt;param-value&gt;UTF-8&lt;/param-value&gt;
-        &lt;/init-param&gt;
-        &lt;init-param&gt;
-            &lt;param-name&gt;forceEncoding&lt;/param-name&gt;
-            &lt;param-value&gt;true&lt;/param-value&gt;
-        &lt;/init-param&gt;
-    &lt;/filter&gt;
-    &lt;filter-mapping&gt;
-        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
-        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-    &lt;/filter-mapping&gt;
-
 &lt;/web-app&gt;</pre>
             <p>4.根据web.xml中context-param指定的配置文件路径新建spring-servlet.xml,添加如下内容：</p>
             <pre>
