@@ -1,3 +1,12 @@
+﻿body{
+    font: 14px/1.5 "微软雅黑",tahoma,arial,sans-serif;
+    background-color: #cccccc;
+}
+
+.container{
+    background-color:white;
+}
+
 /*代码注释*/
 pre comment{
     color: #008000;
