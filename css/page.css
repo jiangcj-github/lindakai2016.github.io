@@ -21,3 +21,8 @@ img{
     width: 100%;
     border: 1px solid gray;
 }
+
+h4{
+    font-weight: bold;
+    font-size: 1.2em;
+}

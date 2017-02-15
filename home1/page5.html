@@ -1,1 +1,89 @@
-http://blog.csdn.net/wenwen091100304/article/details/48035003
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据库连接池c3p0的配置</title>
+    <link href="../bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/page.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="page-header">
+                <h3>
+                    数据库连接池c3p0的配置
+                </h3>
+            </div>
+            <h4>一、什么是数据库连接池？</h4>
+            <p>
+                数据库连接池负责分配、管理和释放数据库连接，它允许应用程序重复使用一个现有的数据库连接，而不是再重新建立一个；
+                释放空闲时间超过最大空闲时间的数据库连接来避免因为没有释放数据库连接而引起的数据库连接遗漏。这项技术能明显提高对数据库操作的性能。
+            </p>
+            <h4>二、数据库连接池的运行机制</h4>
+            <p>（1） 程序初始化时创建连接池</p>
+            <p>（2） 使用时向连接池申请可用连接</p>
+            <p>（3） 使用完毕，将连接返还给连接池</p>
+            <p>（4） 程序退出时，断开所有连接，并释放资源</p>
+            <h4>三、数据库连接池的使用</h4>
+            <p>
+                C3P0是一个优秀开源的连接池，性能也十分可靠。<br>
+                下载地址:&nbsp;<a href="https://sourceforge.net/projects/c3p0/files/?source=navbar" target="_blank">https://sourceforge.net/projects/c3p0/files/?source=navbar</a><br>
+                引入c3p0-0.9.5.jar和mchange-commons-java-0.2.9.jar
+            </p>
+            <p>
+                在类路径下，即src目录下新建一个c3p0-config.xml，名称不能变，c3p0会自动加载该配置文件。
+            </p>
+            <pre>
+&lt;c3p0-config&gt;
+  &lt;default-config&gt;
+    &lt;property name="user"&gt;root&lt;/property&gt;
+    &lt;property name="password"&gt;123456&lt;/property&gt;
+    &lt;property name="driverClass"&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+    &lt;property name="jdbcUrl"&gt;jdbc:mysql://localhost:3306/db&lt;/property&gt;
+    &lt;property name="initialPoolSize"&gt;10&lt;/property&gt;
+    &lt;property name="maxIdleTime"&gt;30&lt;/property&gt;
+    &lt;property name="maxPoolSize"&gt;100&lt;/property&gt;
+    &lt;property name="minPoolSize"&gt;10&lt;/property&gt;
+    &lt;/default-config&gt;
+    <comment>&lt;!--另一个配置--&gt;</comment>
+    &lt;named-config name="myApp"&gt;
+    &lt;property name="user"&gt;root&lt;/property&gt;
+    &lt;property name="password"&gt;123456&lt;/property&gt;
+    &lt;property name="driverClass"&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+    &lt;property name="jdbcUrl"&gt;jdbc:mysql://localhost:3306/db&lt;/property&gt;
+    &lt;property name="initialPoolSize"&gt;10&lt;/property&gt;
+    &lt;property name="maxIdleTime"&gt;30&lt;/property&gt;
+    &lt;property name="maxPoolSize"&gt;100&lt;/property&gt;
+    &lt;property name="minPoolSize"&gt;10&lt;/property&gt;
+  &lt;/named-config&gt;
+&lt;/c3p0-config&gt; </pre>
+            <p>
+                新建一个工具类管理连接DBConnUtil.java.
+            </p>
+
+            <pre>
+public class DBConnUtil{
+    private static ComboPooledDataSource ds = new ComboPooledDataSource();
+    <comment>//private static ComboPooledDataSource ds = new ComboPooledDataSource("myApp");</comment>
+    public static Connection getConnection() {
+        try {
+            return ds.getConnection();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+}
+</pre>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
