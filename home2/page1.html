@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>在github上搭建免费blog</title>
+    <link href="../bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/page.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="page-header">
+                <h3>Apache多主机配置</h3>
+            </div>
+            <p>打开apache/conf/httpd.conf，搜索vhost，找到<pre>
+Include conf/extra/httpd-vhosts.conf</pre>
+            去掉前面的注释，保证httpd-vhosts.conf被包含进来。
+            </p>
+            <p>打开apache/conf/extra/httpd-vhost.conf，添加如下内容<pre>
+&lt;VirtualHost *:80&gt;
+    DocumentRoot "/example/public"
+    ServerName example.com
+    ErrorLog "logs/example.com-error.log"
+    CustomLog "logs/example.com-access.log" common
+&lt;/VirtualHost&gt;
+
+&lt;Directory "/example/public"&gt;
+    Options FollowSymLinks
+    AllowOverride None
+    Order deny,allow
+    Allow from all
+&lt;/Directory&gt;</pre></p>
+            <p>ServerNasme指定虚拟主机的访问域名，DocumentRoot指向的网站的根目录，只有通过域名example.com访问才会被导向至网站的根目录。Directory设置访问权限，如果缺少会出现access forbidden错误。</p>
+            <p>如果拥有example.com域名，则在域名提供商的DNS设置中将该域名绑定到此IP地址上。如果没有改域名，可在本地修改hosts文件，添加如下内容:<pre>
+127.0.0.1 lindakai.com</pre>然后在浏览器中输入example.com就会跳转至改网站。
+            </p>
+            <p>如果执行完上述步骤后仍出现access forbidding，在apache/conf/httpd.conf中找到<pre>
+<comment>#注释下面代码</comment>
+&lt;Directory /&gt;
+    AllowOverride none
+    Require all denied
+&lt;/Directory&gt;</pre></p>
+            <p>最新的apache默认会屏蔽所有目录的访问，只需注释到上面代码即可。</p>
+        </div>
+    </div>
+</div>
+
+<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="../bootstrap-3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
