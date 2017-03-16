@@ -30,7 +30,7 @@ Include conf/extra/httpd-vhosts.conf</pre>
 
 &lt;Directory "/example/public"&gt;
     Options FollowSymLinks
-    AllowOverride None
+    AllowOverride all
     Order deny,allow
     Allow from all
 &lt;/Directory&gt;</pre></p>
@@ -45,6 +45,32 @@ Include conf/extra/httpd-vhosts.conf</pre>
     Require all denied
 &lt;/Directory&gt;</pre></p>
             <p>最新的apache默认会屏蔽所有目录的访问，只需注释到上面代码即可。</p>
+            <div class="page-header">
+                <h3>Mod_Auth_Token使用</h3>
+            </div>
+            <p>下载mod_auth_token：</p>
+            <p>window下载地址:&nbsp;<a href="https://www.apachehaus.net/modules/mod_auth_token/" target="_blank">https://www.apachehaus.net/modules/mod_auth_token/</a></p>
+            <p>linux下载地址:&nbsp;<a href="https://code.google.com/archive/p/mod-auth-token/downloads" target="_blank">https://code.google.com/archive/p/mod-auth-token/downloads</a></p>
+            <p>在/modules下添加mod_auth_token.so，在conf/httpd.conf中添加：<pre>
+LoadModule auth_token_module modules/mod_auth_token.so</pre>在/conf/extra/httpd-vhost.conf中添加：<pre>
+&lt;Location /path/&gt;
+	AuthTokenSecret		"secret"
+    AuthTokenPrefix		/path/
+    AuthTokenTimeout	60
+    AuthTokenLimitByIp	on
+&lt;/Location&gt;</pre>AuthTokenSecret是密钥，AuthTokenPrefix与Location保证一致，AuthTokenTimeout指定url过期时间，AutTokenLimitByIp是否进行IP验收。</p>
+            <p>在php中使用下面方法生成url：<pre>
+$secret = "secret";   <comment>//与AuthTokenSecret一致</comment>
+$protectedPath = "/path/";    <comment>//与AuthTokenPrefix一致</comment>
+$ipLimitation = true;   <comment>//对应AuthTokenLimitByIp</comment>
+$hexTime = dechex(time());
+$fileName = "/exmaple.mp4";
+if ($ipLimitation) {
+    $token = md5($secret . $fileName . $hexTime . $_SERVER["REMOTE_ADDR"]);
+}else {
+    $token = md5($secret . $fileName. $hexTime);
+}
+$url = $protectedPath . $token. "/" . $hexTime . $fileName;</pre></p>
         </div>
     </div>
 </div>
