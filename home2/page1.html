@@ -51,7 +51,7 @@ Include conf/extra/httpd-vhosts.conf</pre>
             <p>下载mod_auth_token：</p>
             <p>window下载地址:&nbsp;<a href="https://www.apachehaus.net/modules/mod_auth_token/" target="_blank">https://www.apachehaus.net/modules/mod_auth_token/</a></p>
             <p>linux下载地址:&nbsp;<a href="https://code.google.com/archive/p/mod-auth-token/downloads" target="_blank">https://code.google.com/archive/p/mod-auth-token/downloads</a></p>
-            <p>在/modules下添加mod_auth_token.so，在conf/httpd.conf中添加：<pre>
+            <p>在/modules下添加mod_auth_token.so，不同的apache版本对应不同版本的文件，如果版本不对应apache服务会启动不起来，在conf/httpd.conf中添加：<pre>
 LoadModule auth_token_module modules/mod_auth_token.so</pre>在/conf/extra/httpd-vhost.conf中添加：<pre>
 &lt;Location /path/&gt;
     AuthTokenSecret      "secret"
@@ -70,10 +70,11 @@ $hexTime = dechex(time());
 $fileName = "/exmaple.mp4";
 if ($ipLimitation) {
     $token = md5($secret . $fileName . $hexTime . $_SERVER["REMOTE_ADDR"]);
-}else {
+}else{
     $token = md5($secret . $fileName. $hexTime);
 }
 $url = $protectedPath . $token. "/" . $hexTime . $fileName;</pre></p>
+            <p>之后重启apache服务器，直接访问path下面的内容就会出现Authentication required!错误，则说明mod_auth_token安装成功。</p>
         </div>
     </div>
 </div>
