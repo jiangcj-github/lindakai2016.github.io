@@ -60,9 +60,12 @@ LoadModule auth_token_module modules/mod_auth_token.so</pre>在/conf/extra/httpd
     AuthTokenLimitByIp   on
 &lt;/Location&gt;</pre>AuthTokenSecret是密钥，AuthTokenPrefix与Location保证一致，AuthTokenTimeout指定url过期时间，AutTokenLimitByIp是否进行IP验收。</p>
             <p>在php中使用下面方法生成url：<pre>
-$secret = "secret";   <comment>//与AuthTokenSecret一致</comment>
-$protectedPath = "/path/";    <comment>//与AuthTokenPrefix一致</comment>
-$ipLimitation = true;   <comment>//对应AuthTokenLimitByIp</comment>
+<comment>//与AuthTokenSecret一致</comment>
+$secret = "secret";
+<comment>//与AuthTokenPrefix一致</comment>
+$protectedPath = "/path/";
+<comment>//对应AuthTokenLimitByIp</comment>
+$ipLimitation = true;
 $hexTime = dechex(time());
 $fileName = "/exmaple.mp4";
 if ($ipLimitation) {
