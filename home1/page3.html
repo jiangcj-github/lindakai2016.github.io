@@ -111,6 +111,11 @@ git diff HEAD   <comment>#比较工作区与版本库差异</pre></comment>
 <primary>执行git push，出现failed to push some refs to XXX。</primary>
 解决方法：由于本地版本库与远程库不一致，即有其他人提交修改，本地库未更新。运行
     git pull origin master
+之后再执行git push命令提交。
+
+<primary>.gitignore无效</primary>
+运行下面命令本地缓存
+   git rm -r --cached .
 之后再执行git push命令提交。</pre>
             </p>
         </div>
