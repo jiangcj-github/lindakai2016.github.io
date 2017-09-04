@@ -42,6 +42,14 @@
     <div><a href="http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html">19. crontab 定时任务</a></div>
     <div><a href="http://www.siguoya.name/pc/home/article/237">允许MySQL使用Navicat等工具远程连接</a></div>
     <div><a href="http://www.jianshu.com/p/33e2e79d0373">nginx分析日志利器goaccess</a></div>
+    <div>
+        <h3>apache不运行php</h3>
+        <p>
+            在httpd.conf文件中，在&lt;IfModule mime_module&gt;&lt;/IfModule&gt;之间添加下面内容，让apache支持php：<br>
+            AddType application/x-httpd-php .php<br>
+            AddType application/x-httpd-php-source .php5<br>
+        </p>
+    </div>
 </div>
 </body>
 </html>
