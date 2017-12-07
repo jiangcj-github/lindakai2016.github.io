@@ -10,22 +10,30 @@
 
 <div class="container">
     <p>
-        安装git
-        yum install git
-        安装php,mysql与httpd
-        yum install php
-        yum install mariadb-server
-        yum install httpd
-        yum install lrzsz
-        php与mysql连接软件：
-        yum -y install php-mysql
-        yum erase php-mysql
-        mysql与mysqlnd冲突，先卸载php-mysql.
-        yum install php-mysqlnd
-        为了使PHP不出现中文乱码，再安装上php-mbstring：
-        yum -y install php-mbstring
-        重启apache：
-        httpd -k restart
+        安装git<br>
+        yum install git<br>
+    </p>
+    <p>
+        安装php,mysql与httpd<br>
+        yum install php<br>
+        yum install mariadb-server<br>
+        yum install httpd<br>
+        yum install lrzsz<br>
+    </p>
+    <p>
+        php与mysql连接软件：<br>
+        yum -y install php-mysql<br>
+        yum erase php-mysql<br>
+        mysql与mysqlnd冲突，先卸载php-mysql.<br>
+        yum install php-mysqlnd<br>
+    </p>
+    <p>
+        为了使PHP不出现中文乱码，再安装上php-mbstring：<br>
+        yum -y install php-mbstring<br>
+    </p>
+    <p>
+        重启apache：<br>
+        httpd -k restart<br>
     </p>
     <p>
         netstat -lntp //查看所有端口
