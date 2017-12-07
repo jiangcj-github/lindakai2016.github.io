@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>coin部署</title>
+</head>
+<body>
+
+<div class="container">
+    <p>
+        安装git
+        yum install git
+        安装php,mysql与httpd
+        yum install php
+        yum install mariadb-server
+        yum install httpd
+        yum install lrzsz
+        php与mysql连接软件：
+        yum -y install php-mysql
+        yum erase php-mysql
+        mysql与mysqlnd冲突，先卸载php-mysql.
+        yum install php-mysqlnd
+        为了使PHP不出现中文乱码，再安装上php-mbstring：
+        yum -y install php-mbstring
+        重启apache：
+        httpd -k restart
+    </p>
+    <p>
+        netstat -lntp //查看所有端口
+    </p>
+</div>
+</body>
+</html>
